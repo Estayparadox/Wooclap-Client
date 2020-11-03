@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { isNullOrUndefined } from "util";
 import { IOrganisations } from "../models/organisations";
 import { IStats } from "../models/stats";
 import { IUserHasAlreadySubmit } from "../models/userHasAlreadySubmit";
@@ -9,7 +8,7 @@ import { getOrganisations, updateOrganisation } from "../services/Organisations.
 import { getStats } from "../services/Stats.service";
 import { getUsersHasAlreadySubmit, postUserHasAlreadySubmit } from "../services/UserHasAlreadySubmit.service";
 import { getUsers, postUser } from "../services/Users.service";
-import { getDomainFromEmailAddress, isValidEmail } from "../utils/mail";
+import { checkInputs, getDomainFromEmailAddress, isValidEmail } from "../utils/mail";
 import EmailWhiteBookView from "./EmailWhiteBook.view";
 
 interface IStateEmailWhiteBookContainer {
@@ -215,15 +214,6 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
         }
     }
 
-    async checkInputs(name: string, email: string, orga: string, job: string): Promise<boolean> {
-        if ((name.length !== 0 && !isNullOrUndefined(name)) &&
-            (email.length !== 0 && !isNullOrUndefined(email) && isValidEmail(email)) &&
-            (orga.length !== 0 && !isNullOrUndefined(orga)) &&
-            (job.length !== 0 && !isNullOrUndefined(job)))
-            return true
-        return false
-    }
-
     async onSubmit(): Promise<void> {
         const data = {
             userName: this.state.userName,
@@ -232,7 +222,7 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
             userJobTitle: this.state.userJobTitle 
         };
         await this.fetchData();
-        let isValid = await this.checkInputs(data.userName, data.userEmail, data.userOrganisation, data.userJobTitle)
+        let isValid = await checkInputs(data.userName, data.userEmail, data.userOrganisation, data.userJobTitle)
         if (!isValid) {
             this.handleShow(false);
             return;
