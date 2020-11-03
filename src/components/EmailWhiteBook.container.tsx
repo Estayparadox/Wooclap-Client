@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { isNullOrUndefined } from "util";
 import { IOrganisations } from "../models/organisations";
 import { IStats } from "../models/stats";
 import { IUserHasAlreadySubmit } from "../models/userHasAlreadySubmit";
@@ -52,7 +53,7 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
         this.fetchData();
     }
 
-    fetchData(): void {
+    async fetchData(): Promise<void> {
         this.fetchUsers();
         this.fetchUsersHasAlreadySubmit();
         this.fetchOrganisations();
@@ -60,7 +61,7 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
     }
 
     handleShow(success: boolean): void {
-        if (success) {
+        if (!success) {
             this.setState({
                 show: true,
                 modalTitle: "Erreur lors de l'envoie.",
@@ -214,8 +215,11 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
         }
     }
 
-    checkInputs(name: string, email: string, orga: string, job: string): boolean {
-        if (name !== "" && isValidEmail(email) && orga !== "" && job !== "")
+    async checkInputs(name: string, email: string, orga: string, job: string): Promise<boolean> {
+        if ((name.length !== 0 && !isNullOrUndefined(name)) &&
+            (email.length !== 0 && !isNullOrUndefined(email) && isValidEmail(email)) &&
+            (orga.length !== 0 && !isNullOrUndefined(orga)) &&
+            (job.length !== 0 && !isNullOrUndefined(job)))
             return true
         return false
     }
@@ -227,8 +231,9 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
             userOrganisation: this.state.userOrganisation,
             userJobTitle: this.state.userJobTitle 
         };
-        this.fetchData();
-        if (!this.checkInputs(data.userName, data.userEmail, data.userOrganisation, data.userJobTitle) !== true) {
+        await this.fetchData();
+        let isValid = await this.checkInputs(data.userName, data.userEmail, data.userOrganisation, data.userJobTitle)
+        if (!isValid) {
             this.handleShow(false);
             return;
         }
@@ -246,7 +251,7 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
             sendMail(data.userName, data.userEmail);
         }
         this.handleShow(true);
-        this.fetchData();
+        await this.fetchData();
     }
 
     render(): JSX.Element {
