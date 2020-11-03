@@ -20,6 +20,10 @@ interface IStateEmailWhiteBookContainer {
     userHasAlreadySubmitList: IUserHasAlreadySubmit[];
     organisationList: IOrganisations[];
     statList: IStats[];
+    show: boolean;
+    modalBody: string;
+    modalTitle: string;
+    modalButtonText: string;
 }
 
 interface IPropsEmailWhiteBookContainer {}
@@ -36,19 +40,51 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
             userList: [],
             userHasAlreadySubmitList: [],
             organisationList: [],
-            statList: []
+            statList: [],
+            show: false,
+            modalBody: "Un mail vous a été envoyé.",
+            modalTitle: "Merci pour intérêt !",
+            modalButtonText: "Super !"
         };
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         this.fetchData();
     }
 
-    fetchData() {
+    fetchData(): void {
         this.fetchUsers();
         this.fetchUsersHasAlreadySubmit();
         this.fetchOrganisations();
         this.fetchStats();
+    }
+
+    handleShow(success: boolean): void {
+        if (success) {
+            this.setState({
+                show: true,
+                modalTitle: "Erreur lors de l'envoie.",
+                modalBody: "Remplissez correctement le formulaire, tous les champs sont requis.",
+                modalButtonText: "J'ai compris"
+            })
+        } else {
+            this.setState({
+                show: true
+            })
+        }
+    }
+
+    handleHide(): void {
+        this.setState({
+            show: false
+        })
+        setTimeout( () => {
+            this.setState({
+                modalTitle: "Merci pour intérêt !",
+                modalBody: "Un mail vous a été envoyé.",
+                modalButtonText: "Super !"
+            });
+        }, 2000)   
     }
 
     handleNameChange(event: any): void {
@@ -85,7 +121,7 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
         }
     }
 
-    async fetchUsersHasAlreadySubmit() {
+    async fetchUsersHasAlreadySubmit(): Promise<void> {
         const response: any = await getUsersHasAlreadySubmit();
         if (response) {
             const userList: IUserHasAlreadySubmit[] = JSON.parse(response).data
@@ -95,7 +131,7 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
         }
     }
 
-    async fetchOrganisations() {
+    async fetchOrganisations(): Promise<void> {
         const response: any = await getOrganisations();
         if (response) {
             const organisationList: IOrganisations[] = JSON.parse(response).data
@@ -105,7 +141,7 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
         }
     }
 
-    async fetchStats() {
+    async fetchStats(): Promise<void> {
         const response: any = await getStats();
         if (response) {
             const statList: IStats[] = JSON.parse(response).data
@@ -178,21 +214,24 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
         }
     }
 
-    areFieldsOk(name: string, email: string, orga: string, job: string): boolean {
+    checkInputs(name: string, email: string, orga: string, job: string): boolean {
         if (name !== "" && isValidEmail(email) && orga !== "" && job !== "")
             return true
         return false
     }
 
-    async onSubmit() {
+    async onSubmit(): Promise<void> {
         const data = {
             userName: this.state.userName,
             userEmail: this.state.userEmail,
             userOrganisation: this.state.userOrganisation,
             userJobTitle: this.state.userJobTitle 
         };
-        if (this.areFieldsOk(data.userName, data.userEmail, data.userOrganisation, data.userJobTitle) !== true) { return };
         this.fetchData();
+        if (!this.checkInputs(data.userName, data.userEmail, data.userOrganisation, data.userJobTitle) !== true) {
+            this.handleShow(false);
+            return;
+        }
         let emailExist = this.state.userList.filter(e => e.email_address === data.userEmail);
         let alreadySubmit = this.state.userHasAlreadySubmitList.filter(e => e.email_address === data.userEmail)
         if (emailExist.length > 0 && alreadySubmit.length > 0) {
@@ -206,7 +245,8 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
             await postUserHasAlreadySubmit(data.userName, data.userJobTitle, data.userOrganisation, data.userEmail);
             sendMail(data.userName, data.userEmail);
         }
-        this.fetchData();    
+        this.handleShow(true);
+        this.fetchData();
     }
 
     render(): JSX.Element {
@@ -217,11 +257,16 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
                     userOrganisation={this.state.userOrganisation}
                     userJobTitle={this.state.userJobTitle}
                     userEmail={this.state.userEmail}
+                    show={this.state.show}
+                    modalBody={this.state.modalBody}
+                    modalTitle={this.state.modalTitle}
+                    modalButtonText={this.state.modalButtonText}
                     handleNameChange={this.handleNameChange.bind(this)}
                     handleOrganisationChange={this.handleOrganisationChange.bind(this)}
                     handleJobTitleChange={this.handleJobTitleChange.bind(this)}
                     handleEmailChange={this.handleEmailChange.bind(this)}
                     onSubmit={this.onSubmit.bind(this)}
+                    handleHide={this.handleHide.bind(this)}
                 />
             </div>
         );

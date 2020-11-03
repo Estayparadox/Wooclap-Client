@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Button, Modal } from "react-bootstrap";
 import "../scss/components/EmailWhiteBook.view.scss";
+import "../scss/components/Modal.view.scss";
 
 interface IPropsEmailWhiteBookView {
     handleNameChange: (event: any) => void;
@@ -7,10 +9,15 @@ interface IPropsEmailWhiteBookView {
     handleJobTitleChange: (event: any) => void;
     handleEmailChange: (event: any) => void;
     onSubmit: () => void;
+    handleHide: () => void;
     userName: string;
     userOrganisation: string;
     userJobTitle: string;
     userEmail: string;
+    show: boolean;
+    modalBody: string;
+    modalTitle: string;
+    modalButtonText: string;
 }
 
 class EmailWhiteBookView extends Component<IPropsEmailWhiteBookView> {
@@ -68,6 +75,23 @@ class EmailWhiteBookView extends Component<IPropsEmailWhiteBookView> {
                             onClick={this.props.onSubmit}>
                             Télécharger
                         </button>
+                        <Modal
+                            show={this.props.show}
+                            onHide={this.props.handleHide}
+                            backdrop="static"
+                            keyboard={false}>
+                            <Modal.Header closeButton>
+                            <Modal.Title>{this.props.modalTitle}</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                {this.props.modalBody}
+                            </Modal.Body>
+                            <Modal.Footer>
+                            <Button variant="secondary" onClick={this.props.handleHide}>
+                                {this.props.modalButtonText}
+                            </Button>
+                            </Modal.Footer>
+                        </Modal>
                     </div>
                 </div>
             </div>

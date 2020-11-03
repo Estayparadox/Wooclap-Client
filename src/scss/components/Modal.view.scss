@@ -1,0 +1,43 @@
+@import "../constants/font.scss";
+@import "../constants/color.scss";
+
+.modal-content {
+    text-align: center;
+    .modal-header {
+        border-bottom: none !important;
+    }
+    .modal-title {
+        color: $dark-blue;
+        font-family: nunito-black;
+        font-size: 30px;
+        font-weight: 900;
+        letter-spacing: 0;
+        line-height: 72px;
+        width: -webkit-fill-available;
+    }
+    .modal-body {
+        color: $grey;
+        font-family: nunito;
+        font-size: 16px;
+        font-weight: 300;
+        letter-spacing: 0;
+        line-height: 28px;
+    }
+    .btn-secondary {
+        width: 140px;
+        border-radius: 41.5px;
+        color: $white;
+        font-family: Nunito;
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 0;
+        line-height: 19px;
+        text-align: center;
+        background: linear-gradient(180deg, $white-blue 0%, $blue 100%);
+        border-color: none;
+    }
+    .modal-footer {
+        border-top: none !important;
+        display: block;
+    }
+}
