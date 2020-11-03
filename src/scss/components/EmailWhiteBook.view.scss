@@ -1,0 +1,93 @@
+@import "../constants/font.scss";
+@import "../constants/color.scss";
+
+.form-wrapper {
+    text-align: -webkit-center;
+
+    h2 {
+        color: $dark-blue;
+        font-family: Nunito;
+        font-size: 54px;
+        font-weight: 900;
+        letter-spacing: 0;
+        line-height: 74px;
+        margin-bottom: 39px;
+    }
+}
+
+.form-card {
+    background-color: $white;
+    height: 660px;
+    width: 631px;
+    box-shadow: 0 5px 8px 0 rgba(0,0,0,.125);
+    padding: 60px 63px 60px 63px;
+    border-radius: 45px;
+
+    .validation-form {
+        margin: 30px 0 30px 0;
+
+        p {
+            display: contents;
+        }
+
+        strong {
+            font-family: nunito-black;
+        }
+
+        a {
+            color: $white-blue;
+            cursor: pointer;
+        }
+
+        a:hover {
+            color: $blue;
+        }
+    }
+
+    .btn-custom {
+        color: $white;
+        font-family: Nunito;
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 0;
+        line-height: 19px;
+        text-align: center;
+        height: 45px;
+        width: 152px;
+        border-radius: 41.5px;
+        background: linear-gradient(180deg, $white-blue 0%, $blue 100%);
+    }
+}
+
+.form-group {
+    .label-p {
+        text-align: initial;
+        margin: 0px;
+        height: 22px;
+        color: $dark-blue;
+        font-family: nunito;
+        font-size: 16px;
+        font-weight: 300;
+        letter-spacing: 0;
+        line-height: 22px;
+    }
+    .form-control {
+        margin-top: 0.5em;
+        box-sizing: border-box;
+        height: 60px;
+        border: 3px solid $white-grey;
+        border-radius: 30px;
+    }
+}
+
+.form-description {
+    height: 22px;
+    width: 407px;
+    color: $dark-blue;
+    font-family: Nunito;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 22px;
+    text-align: center;
+}
