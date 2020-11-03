@@ -2,17 +2,19 @@ import React, { Component } from "react";
 import "../scss/components/Article.view.scss";
 import header from "../assets/header.png";
 import infographic from "../assets/infographic.png";
-import headway from "../assets/headway.png"
+import headway from "../assets/headway.png";
 
 class ArticleView extends Component {
 
-    handleScrollToList() {
+    executeScroll() {
         window.scrollTo({
-            top: 0
-        })
+            top: 1850,
+            behavior: 'smooth',
+          });
     }
 
     render(): JSX.Element {
+
         return (
             <React.Fragment>
                 <div className={"first-article"}>
@@ -23,7 +25,7 @@ class ArticleView extends Component {
                         <p className={"article-text"}>A quoi ressembleront les campus de demain ? Retour sur les révolutions numériques et pédagogiques qui bousculent aujourd’hui les établissements de l’enseignement supérieur.</p>
                         <button 
                             className="btn btn-custom" 
-                            onClick={this.handleScrollToList}>
+                            onClick={this.executeScroll}>
                             Télécharger gratuitement
                         </button>
                     </div>
