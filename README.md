@@ -13,19 +13,19 @@ REACT_APP_APP_URL=<the front app url>
 ```
 
 ### Run
-In the frontend/ folder run
+At the root of the project run
 ```
 $> yarn start
 ```
 
 ### Test
-In the frontend/ folder run
+At the root of the project run
 ```
 $> yarn test
 ```
 
 ### Build
-In the frontend/ folder run
+At the root of the project run
 ```
 $> yarn build
 ```
