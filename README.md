@@ -1,15 +1,16 @@
 # Wooclap-Client
 
 ### Prerequisite
-In the frontend/ folder create a .env file and copy the code below inside this file.
+In the frontend/ folder create a .env file and copy the accessible code on the document below.
+
+[Google Doc](https://docs.google.com/document/d/1a2kmwagv1bPuxloXzOAb0p535OUYqnEdXI_Wsde7rqU/edit)
+
+or paste the code below and complete it:
 
 ```
-REACT_APP_API_URL=http://localhost:8000/api/
-REACT_APP_APP_URL=http://localhost:3000
+REACT_APP_API_URL=<the api url which will be trigger by the front>
+REACT_APP_APP_URL=<the front app url>
 ```
-
-* REACT_APP_API_URL is the api url which will be trigger by the front
-* REACT_APP_APP_URL is the app url
 
 ### Run
 In the frontend/ folder run
