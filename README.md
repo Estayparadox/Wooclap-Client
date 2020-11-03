@@ -1,7 +1,7 @@
 # Wooclap-Client
 
 ### Prerequisite
-In the frontend/ folder create a .env file and copy the accessible code on the following file:
+At the root of the project create a .env file and copy the accessible code on the following file:
 
 * [Google Doc](https://docs.google.com/document/d/1a2kmwagv1bPuxloXzOAb0p535OUYqnEdXI_Wsde7rqU/edit)
 
