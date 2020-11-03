@@ -84,7 +84,7 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
                 modalBody: "Un mail vous a été envoyé.",
                 modalButtonText: "Super !"
             });
-        }, 2000)   
+        }, 1000)   
     }
 
     handleNameChange(event: any): void {

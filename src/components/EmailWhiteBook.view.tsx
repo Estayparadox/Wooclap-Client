@@ -68,7 +68,7 @@ class EmailWhiteBookView extends Component<IPropsEmailWhiteBookView> {
                                 className={"form-control"} />
                         </div>
                         <div className={"validation-form"}>
-                            <p className={"form-description"}>Vous voulez tester Wooclap <strong>gratuitement</strong> ? C’est par <a>ici</a> !</p>
+                            <p className={"form-description"}>Vous voulez tester Wooclap <strong>gratuitement</strong> ? C’est par <a href={"https://app.wooclap.com/auth/register?lang=fr"}>ici</a> !</p>
                         </div>
                         <button 
                             className="btn btn-custom" 

@@ -62,7 +62,7 @@ class ArticleView extends Component {
                     <img className={"img-headway"} src={headway} alt="headway"/>
                     <div className={"left-part"}>
                         <h2 className={"black-title"}>En partenariat avec HEADway</h2>
-                        <p className={"article-text"}>Fondé en 2011, <a href={process.env.REACT_APP_APP_URL}>HEADway Advisory</a> est le leader français du conseil en stratégie exclusivement dédié aux acteurs de l’enseignement supérieur, de la recherche et de la formation. Leur expertise leur permet d’avoir une vision globale des défis que leurs clients doivent relever, tout en apportant des solutions sur mesure adaptées aux enjeux particuliers de chaque institution.</p>
+                        <p className={"article-text"}>Fondé en 2011, <a href={"https://headway-advisory.com/fr/"}>HEADway Advisory</a> est le leader français du conseil en stratégie exclusivement dédié aux acteurs de l’enseignement supérieur, de la recherche et de la formation. Leur expertise leur permet d’avoir une vision globale des défis que leurs clients doivent relever, tout en apportant des solutions sur mesure adaptées aux enjeux particuliers de chaque institution.</p>
                     </div>
                 </div>
             </React.Fragment>
