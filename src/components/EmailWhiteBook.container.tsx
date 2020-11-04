@@ -8,7 +8,7 @@ import { getOrganisations, updateOrganisation } from "../services/Organisations.
 import { getStats } from "../services/Stats.service";
 import { getUsersHasAlreadySubmit, postUserHasAlreadySubmit } from "../services/UserHasAlreadySubmit.service";
 import { getUsers, postUser } from "../services/Users.service";
-import { checkInputs, getDomainFromEmailAddress, isValidEmail } from "../utils/mail";
+import { checkInputs, getDomainFromEmailAddress } from "../utils/mail";
 import EmailWhiteBookView from "./EmailWhiteBook.view";
 
 interface IStateEmailWhiteBookContainer {
@@ -114,40 +114,56 @@ class EMailWhiteBookContainer extends Component<IPropsEmailWhiteBookContainer, I
     async fetchUsers() {
         const response: any = await getUsers();
         if (response) {
-            const userList: IUsers[] = JSON.parse(response).data
-            this.setState({
-                userList: userList
-            })
+            try {
+                const userList: IUsers[] = JSON.parse(response).data
+                this.setState({
+                    userList: userList
+                })
+            } catch (err) {
+                console.error(err);
+            }
         }
     }
 
     async fetchUsersHasAlreadySubmit(): Promise<void> {
         const response: any = await getUsersHasAlreadySubmit();
         if (response) {
-            const userList: IUserHasAlreadySubmit[] = JSON.parse(response).data
-            this.setState({
-                userHasAlreadySubmitList: userList
-            })
+            try {
+                const userList: IUserHasAlreadySubmit[] = JSON.parse(response).data
+                this.setState({
+                    userHasAlreadySubmitList: userList
+                })
+            } catch (err) {
+                console.error(err);
+            }
         }
     }
 
     async fetchOrganisations(): Promise<void> {
         const response: any = await getOrganisations();
         if (response) {
-            const organisationList: IOrganisations[] = JSON.parse(response).data
-            this.setState({
-                organisationList: organisationList
-            })
+            try {
+                const organisationList: IOrganisations[] = JSON.parse(response).data
+                this.setState({
+                    organisationList: organisationList
+                })
+            } catch (err) {
+                console.error(err);
+            }
         }
     }
 
     async fetchStats(): Promise<void> {
         const response: any = await getStats();
         if (response) {
-            const statList: IStats[] = JSON.parse(response).data
-            this.setState({
-                statList: statList
-            })
+            try {
+                const statList: IStats[] = JSON.parse(response).data
+                this.setState({
+                    statList: statList
+                })
+            } catch (err) {
+                console.error(err);
+            }
         }
     }
 
