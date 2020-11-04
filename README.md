@@ -13,20 +13,24 @@ REACT_APP_API_URL=<the api url which will be trigger by the front>
 REACT_APP_APP_URL=<the front app url>
 ```
 
-### Run
+### Install
 At the root of the project run
+```
+$> yarn install
+```
+
+### Commands
 ```
 $> yarn start
 ```
+Run the project
 
-### Test
-At the root of the project run
 ```
 $> yarn test
 ```
+Run some tests on the project
 
-### Build
-At the root of the project run
 ```
 $> yarn build
 ```
+Build the project
