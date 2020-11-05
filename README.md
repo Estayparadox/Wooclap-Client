@@ -1,5 +1,5 @@
 # Wooclap-Client
-![badge1](https://img.shields.io/badge/license-MIT-brightgreen.svg ) ![badge2](https://img.shields.io/badge/language-ReactJS-blue)
+![badge1](https://img.shields.io/badge/license-MIT-brightgreen.svg ) ![badge2](https://img.shields.io/badge/language-TypeScript-blue)
 
 ### Prerequisite
 At the root of the project create a .env file and copy the accessible code on the following file:
